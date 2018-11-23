@@ -1,4 +1,4 @@
-package com.github.gvolpe.effects.http
+package com.github.jacke.mtproto.http
 
 import cats.effect.IO
 import com.softwaremill.sttp._

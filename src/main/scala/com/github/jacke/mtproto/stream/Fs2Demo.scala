@@ -1,4 +1,4 @@
-package com.github.gvolpe.effects.stream
+package com.github.jacke.mtproto.stream
 
 import cats.effect.IO
 import fs2._

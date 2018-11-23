@@ -1,4 +1,4 @@
-package com.github.gvolpe.effects
+package com.github.jacke.mtproto
 
 import cats.effect.IO
 

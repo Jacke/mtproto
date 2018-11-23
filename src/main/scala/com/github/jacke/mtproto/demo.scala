@@ -1,7 +1,6 @@
-package com.github.gvolpe.effects
+package com.github.jacke.mtproto
 
 import cats.effect._
-
 import scala.concurrent.{ExecutionContext, ExecutionContextExecutor, Future}
 
 trait EffectDemo {

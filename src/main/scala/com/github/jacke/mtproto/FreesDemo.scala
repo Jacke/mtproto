@@ -1,3 +1,4 @@
+package com.github.jacke.mtproto
 import cats.effect._
 import fs2._
 import akka.actor.{ Actor, ActorRef, Props, ActorSystem }

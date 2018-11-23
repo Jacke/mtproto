@@ -1,4 +1,4 @@
-package com.github.gvolpe.effects.persistence
+package com.github.jacke.mtproto.persistence
 
 import cats.effect.IO
 import doobie.free.connection.ConnectionIO

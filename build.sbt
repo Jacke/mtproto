@@ -57,7 +57,7 @@ libraryDependencies += "ru.tinkoff" %% "typed-schema" % "0.10.4"
 
 libraryDependencies += "com.typesafe.akka" %% "akka-stream" % "2.5.17"
 
-libraryDependencies += "com.typesafe.akka" %% "akka-stream-kafka" % "0.11"
+libraryDependencies += "com.typesafe.akka" %% "akka-stream-kafka" % "0.13"
 
 libraryDependencies += "co.fs2" %% "fs2-core" % "1.0.0" // For cats 1.4.0 and cats-effect 1.0
 
