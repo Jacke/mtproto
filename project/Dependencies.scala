@@ -1,0 +1,42 @@
+import sbt._
+
+object Dependencies {
+
+  lazy val CatsVersion        = "1.4.0"
+  lazy val CatsEffectVersion  = "1.0.0"
+  lazy val MonixVersion       = "3.0.0-M2"
+  lazy val Fs2Version         = "1.0.0"  
+  lazy val Http4sVersion      = "0.18.0-M5"
+  lazy val CirceVersion       = "0.9.0-M2"
+  lazy val DoobieVersion      = "0.5.0-M9"
+  lazy val SttpVersion        = "1.0.5"
+
+// libraryDependencies += "org.typelevel" %% "cats-core" % "1.4.0"
+/*
+*/
+
+
+  lazy val cats           = "org.typelevel"   %% "cats-core"            % CatsVersion
+  lazy val catsEffect     = "org.typelevel"   %% "cats-effect"          % CatsEffectVersion
+  lazy val monixEval      = "io.monix"        %% "monix-eval"           % MonixVersion
+
+  lazy val fs2            = "co.fs2"          %% "fs2-core"             % Fs2Version
+
+  lazy val http4sServer   = "org.http4s"      %% "http4s-blaze-server"  % Http4sVersion
+  lazy val http4sSClient  = "org.http4s"      %% "http4s-blaze-client"  % Http4sVersion
+  lazy val http4sDsl      = "org.http4s"      %% "http4s-dsl"           % Http4sVersion
+  lazy val http4sSCirce   = "org.http4s"      %% "http4s-circe"         % Http4sVersion
+
+  lazy val circeCore      = "io.circe"        %% "circe-core"           % CirceVersion
+  lazy val circeGeneric   = "io.circe"        %% "circe-generic"        % CirceVersion
+
+  lazy val doobieCore     = "org.tpolecat"    %% "doobie-core"          % DoobieVersion
+  lazy val doobieH2       = "org.tpolecat"    %% "doobie-h2"            % DoobieVersion
+
+  lazy val sttp           = "com.softwaremill.sttp" %% "core"                           % SttpVersion
+  lazy val sttpCats       = "com.softwaremill.sttp" %% "async-http-client-backend-cats" % SttpVersion
+
+  lazy val logback        = "ch.qos.logback"  % "logback-classic"       % "1.2.1"
+  lazy val scalaTest      = "org.scalatest"   %% "scalatest"            % "3.0.3"
+
+}
