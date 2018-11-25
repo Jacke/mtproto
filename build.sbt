@@ -4,6 +4,7 @@ resolvers += Resolver.jcenterRepo
 
 resolvers += "Sonatype snapshots" at "https://oss.sonatype.org/content/repositories/snapshots/"
 
+resolvers += "Sonatype Public" at "https://oss.sonatype.org/content/groups/public/"
 
 resolvers += "third party" at "https://repository.jboss.org/nexus/content/repositories/thirdparty-releases/"
 
@@ -60,6 +61,20 @@ libraryDependencies += "com.typesafe.akka" %% "akka-stream" % "2.5.17"
 libraryDependencies += "com.typesafe.akka" %% "akka-stream-kafka" % "0.13"
 
 libraryDependencies += "co.fs2" %% "fs2-core" % "1.0.0" // For cats 1.4.0 and cats-effect 1.0
+
+libraryDependencies += "org.scodec" %% "scodec-bits" % "1.1.6"
+
+libraryDependencies += "org.scodec" %% "scodec-akka" % "0.3.0"
+
+
+libraryDependencies += "org.scodec" %% "scodec-core" % "1.10.3"
+
+libraryDependencies ++= {
+  if (scalaBinaryVersion.value startsWith "2.10")
+    Seq(compilerPlugin("org.scalamacros" % "paradise" % "2.1.0" cross CrossVersion.full))
+  else Nil
+}
+
 
 
 addCompilerPlugin("org.spire-math" %% "kind-projector" % "0.9.4")

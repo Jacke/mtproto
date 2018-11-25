@@ -3,7 +3,7 @@ package com.github.jacke.mtproto
 import cats.effect.IO
 import monix.eval.Task
 
-object IOExample extends TaskApp with EffectDemo with AsyncDemo with SyncDemo with LiftIODemo {
+object IOExample extends EffectDemo with TaskApp with AsyncDemo with SyncDemo with LiftIODemo {
   override def run: Task[Unit] = {
     //delay[Task]
     //suspend[Task

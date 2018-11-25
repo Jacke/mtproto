@@ -10,15 +10,25 @@ import javax.crypto._
 import java.security._
 import java.util._
 
+// int64 ~ int64 ~ int32 ~ bytes
 
-object SampleCode extends App {
 
+object MTProtoServer extends App {
   class SimplisticHandler extends Actor {
     import Tcp._
     def receive = {
       case Received(data) ⇒ {
-        println(s"data: ${data} ${DatatypeConverter.printHexBinary(data.toArray)} ${data.utf8String}")
-        sender() ! Write(akka.util.ByteString(java.time.LocalDateTime.now.toString()) ++ akka.util.ByteString(" ") ++ data)
+        println(s"""
+          data: 
+          ${data} 
+          hex representation:
+          ${DatatypeConverter.printHexBinary(data.toArray)} 
+          utf-8 string representation:
+          ${data.utf8String}""")
+
+        println(s"byteStringToBitVector: ${ AkkaToScodec.byteStringToBitVector(data) }" )
+
+        sender() ! Write(akka.util.ByteString(java.time.LocalDateTime.now.toString()) ++ akka.util.ByteString(" "))
       }
       case PeerClosed     ⇒ context stop self
     }
@@ -29,7 +39,6 @@ object SampleCode extends App {
   }
 
   class Server extends Actor {
-
     import Tcp._
     implicit val system = ActorSystem("iot-system")
 
@@ -55,28 +64,6 @@ object SampleCode extends App {
         implicit val system = ActorSystem("tg-system")
         val server = system.actorOf(Server.props, "server")
         println(s"First: $server")
-        val password = "changeit".toCharArray()
-        val alias = "123"
-        val kpg: KeyPairGenerator = KeyPairGenerator.getInstance("RSA");
-        kpg.initialize(1024);
-        val encoder = java.util.Base64.getEncoder();
-        val kp:KeyPair = kpg.generateKeyPair();
-        val pub: Key = kp.getPublic();
-        val pvt: PrivateKey = kp.getPrivate();
-
-        val encryptCipher = Cipher.getInstance("RSA/ECB/NoPadding");
-        encryptCipher.init(Cipher.ENCRYPT_MODE, pvt);
-        val plainText  = "abcdefghijklmnopqrstuvwxyz".getBytes("UTF-8");
-        val cipherText: Array[Byte] = encryptCipher.doFinal(plainText);
-    
-        println(s"pub: ${encoder.encodeToString(pub.getEncoded())} pvt: ${encoder.encodeToString(pvt.getEncoded())}")
-        println(s"encrypted: ${new String(Base64.getEncoder().encode(cipherText))}");
-
-        val decryptCipher = Cipher.getInstance("RSA/ECB/NoPadding");
-        decryptCipher.init(Cipher.DECRYPT_MODE, pub);
-        val plainText2: Array[Byte] = decryptCipher.doFinal(cipherText)
-
-        println(s"decrypted: ${new String(plainText)} ${new String(plainText2) }")
 
         // server ! "printit"
         //val infiniteStream = Stream.emit(1).repeat.covary[IO].map(_ + 3)
