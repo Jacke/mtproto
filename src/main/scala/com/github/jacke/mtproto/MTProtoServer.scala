@@ -10,7 +10,10 @@ import javax.crypto._
 import java.security._
 import java.util._
 
-// int64 ~ int64 ~ int32 ~ bytes
+import scodec._
+import scodec.bits._
+import scodec.codecs._
+import scodec.interop.akka._
 
 
 object MTProtoServer extends App {
@@ -28,7 +31,13 @@ object MTProtoServer extends App {
 
         println(s"byteStringToBitVector: ${ AkkaToScodec.byteStringToBitVector(data) }" )
 
-        sender() ! Write(akka.util.ByteString(java.time.LocalDateTime.now.toString()) ++ akka.util.ByteString(" "))
+        AkkaToScodec.byteStringToBitVector(data) match {
+          case a if a == hex"0xdeadbeef" => {
+            implicit val system = ActorSystem("tg-system")
+            system.terminate()
+          }
+          case _ => sender() ! Write(AkkaToScodec.byteStringToBitVector(data).bytes.toByteString)
+        }
       }
       case PeerClosed     ⇒ context stop self
     }
@@ -40,7 +49,7 @@ object MTProtoServer extends App {
 
   class Server extends Actor {
     import Tcp._
-    implicit val system = ActorSystem("iot-system")
+    implicit val system = ActorSystem("tg-system")
 
     IO(Tcp) ! Bind(self, new InetSocketAddress("localhost", 3030))
 
@@ -64,11 +73,5 @@ object MTProtoServer extends App {
         implicit val system = ActorSystem("tg-system")
         val server = system.actorOf(Server.props, "server")
         println(s"First: $server")
-
-        // server ! "printit"
-        //val infiniteStream = Stream.emit(1).repeat.covary[IO].map(_ + 3)
-        //val output = infiniteStream.compile.toVector.unsafeRunSync()
-        //println(s"Result >> $output") // prints Result >> Vector(4, 4, 4, 4, ... )
-
     }
 }
