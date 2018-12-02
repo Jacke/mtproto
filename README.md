@@ -1,6 +1,19 @@
 MTProto-akka-demo
 ================
 
+у нас есть сейчас простая задача, как раз на проверим как идет аутсорс:
+сделать метод, который шлет пуш через FCM на sttp + akka backend, это должен быть синглтон с параметрами title, text, fcm token, device token и результат должен быть упакован в scalaz-zio Task[Boolean].
+
+почему каждые n секунд? когда вызываю метод, то он должен дернуть FCM и вернуть результат как Boolean в zio.Task
+нет, нужно как выше. там 3 класса нужно написать руками для upickle: Request, Sucess response, Failure response
+
+синглтон (title, text, fcm token, device token) c функций push обращается c помощью akka-http client к FCM без токена, парсит ответ upickle через возвращающая Task[Boolean]
+сервер? там клиент к FCM
+
+
+
+
+
 Write a primitive *MTProto* server using scodec and akka-stream (TCP).
 
 The server must be able to perform the first 2 commands when initializing a DH session: *req_pq* and *req_DH_params*.

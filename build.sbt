@@ -43,6 +43,7 @@ lazy val root = (project in file(".")).settings(
     doobieH2,
     sttp,
     sttpCats,
+    sttpAkka,
     cats,
     scalaTest % Test
   )
@@ -66,6 +67,7 @@ libraryDependencies += "org.scodec" %% "scodec-bits" % "1.1.6"
 
 libraryDependencies += "org.scodec" %% "scodec-akka" % "0.3.0"
 
+libraryDependencies += "org.scalaz" %% "scalaz-zio" % "0.3.2"
 
 libraryDependencies += "org.scodec" %% "scodec-core" % "1.10.3"
 

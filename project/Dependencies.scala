@@ -36,6 +36,8 @@ object Dependencies {
   lazy val sttp           = "com.softwaremill.sttp" %% "core"                           % SttpVersion
   lazy val sttpCats       = "com.softwaremill.sttp" %% "async-http-client-backend-cats" % SttpVersion
 
+  lazy val sttpAkka       = "com.softwaremill.sttp" %% "akka-http-backend" % "1.0.5"
+
   lazy val logback        = "ch.qos.logback"  % "logback-classic"       % "1.2.1"
   lazy val scalaTest      = "org.scalatest"   %% "scalatest"            % "3.0.3"
 
