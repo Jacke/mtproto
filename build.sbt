@@ -67,7 +67,12 @@ libraryDependencies += "org.scodec" %% "scodec-bits" % "1.1.6"
 
 libraryDependencies += "org.scodec" %% "scodec-akka" % "0.3.0"
 
-libraryDependencies += "org.scalaz" %% "scalaz-zio" % "0.3.2"
+libraryDependencies += "org.scalaz" %% "scalaz-zio" % "0.4.1"
+
+libraryDependencies += "org.scalaz" %% "scalaz-zio-interop" % "0.4.1"
+
+libraryDependencies += "com.lihaoyi" %% "upickle" % "0.7.1"
+
 
 libraryDependencies += "org.scodec" %% "scodec-core" % "1.10.3"
 
