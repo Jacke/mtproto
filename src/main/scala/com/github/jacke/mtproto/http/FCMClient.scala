@@ -8,11 +8,6 @@ import upickle._
 import upickle.default.{ReadWriter => RW, macroRW}
 import scala.concurrent.ExecutionContext.Implicits.global
 
-case class FCMClientResponse(multicast_id: Long = 0, success: Int = 0, failure: Int = 0, canonical_ids: Int = 0)
-object FCMClientResponse {
-  implicit val rw: RW[FCMClientResponse] = macroRW
-}
-
 object FCMClient {
   def push(payload: String, title: String, token: String, device: String): Future[Boolean] = {
     implicit val backend = AkkaHttpBackend()
@@ -34,10 +29,10 @@ object FCMClient {
     """)
       .post(uri"https://fcm.googleapis.com/fcm/send")
      request.send().map { response => 
-       upickle.default.read[FCMClientResponse](response.body.right.toOption.get).success match {
-        case success if success == 1 => true
-        case _ => false 
-       } 
+       scala.util.Try(upickle.default.read[FCMClientResponse](response.body.right.toOption.get)) match {
+         case Success(v) if v.success == 1 => true
+         case _ => false           
+       }
      }
   }
 }
